@@ -1,12 +1,12 @@
 {
-  "name": "express-di-helper",
+  "name": "express-enhanced-router",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gives express.js router Infrastructure that it deserves",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Tymur Smyr <godlyfast@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "pluralize": "^8.0.0"

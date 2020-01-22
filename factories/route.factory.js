@@ -23,8 +23,16 @@ const RouteFactory = routes => {
 
     module[routeObject.name] = (...args) => {
       controller[routeObject.action](...args)
-        .then(results => controller.sendJson(results, ...args))
-        .catch(err => controller.sendError(err, ...args));
+        .then(results =>
+          typeof controller.sendJson === "function"
+            ? controller.sendJson(results, ...args)
+            : args[1].status(200).json(results)
+        )
+        .catch(err =>
+          typeof controller.sendError === "function"
+            ? controller.sendError(err, ...args)
+            : args[1].status(err.status || 500).json(err)
+        );
     };
   });
   return module;

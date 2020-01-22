@@ -22,9 +22,7 @@ class ServiceContainer {
       providerFile = require(ROOT_LEVEL + "infrastructure/providers/" +
         serviceName +
         ".provider");
-    } catch (e) {
-      console.log('NOT FOUND PROVIDER', serviceName,)
-    }
+    } catch (e) {}
     if (providerFile) return providerFile[toPascal(serviceName) + "Provider"]();
     switch (toKebab(serviceName).split("-")[1]) {
       case "service":

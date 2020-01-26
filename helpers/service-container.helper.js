@@ -38,8 +38,10 @@ class ServiceContainer {
       ? new service(...injects.map(o => o.instance))
       : new service();
     
-    for (const i in injects) {
-      instance[_.camelCase(i.name)] = i.instance;
+    if (injects) {
+      injects.forEach((i) => {
+        instance[_.camelCase(i.name)] = i.instance;
+      });
     }
 
     return instance;  

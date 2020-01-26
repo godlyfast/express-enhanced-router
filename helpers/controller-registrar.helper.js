@@ -8,8 +8,8 @@ module.exports = {
     var normalizedPath = path.join(__dirname, "../" + controllerPath);
 
     fs.readdirSync(normalizedPath).forEach(function(file) {
-      const modulePath = path.normalize("../" + controllerPath + "/" + file);
-      const module = require(modulePath);
+      const relPath = path.relative(__dirname, normalizedPath) + '/' + file;
+      const module = require(relPath);
       const ctrlName = capitalize(file.split(".")[0]) + "Controller";
       const ctrl = module[ctrlName];
       if (!ctrl)

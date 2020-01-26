@@ -5,12 +5,20 @@ const ROOT_LEVEL = '../../../';
 const providers = {};
 class ServiceContainer {
 
+  constructor(rootLevel) {
+    this.rootLevel = rootLevel;
+  }
+
   registerProvider(name, provider) {
     providers[name] = provider;
   }
 
+  setRootLevel(rootLevel) {
+    this.rootLevel = rootLevel;
+  }
+
   _createEntity(entity, serviceName) {
-    const module = require(ROOT_LEVEL + "infrastructure/" +
+    const module = require(this.rootLevel + "infrastructure/" +
       pluralize(entity) +
       "/" +
       toKebab(serviceName).split("-")[0] +
@@ -25,7 +33,7 @@ class ServiceContainer {
     if (providers[serviceName]) return providers[serviceName]();
     let providerFile;
     try {
-      providerFile = require(ROOT_LEVEL + "infrastructure/providers/" +
+      providerFile = require(this.rootLevel + "infrastructure/providers/" +
         serviceName +
         ".provider");
     } catch (e) {}
@@ -43,4 +51,4 @@ class ServiceContainer {
   }
 }
 
-module.exports = new ServiceContainer();
+module.exports = new ServiceContainer(ROOT_LEVEL);

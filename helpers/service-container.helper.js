@@ -25,9 +25,23 @@ class ServiceContainer {
       "." +
       entity);
     const service = module[serviceName];
-    return service.$inject
-      ? new service(...service.$inject().map(this.get.bind(this)))
+    
+    let injects = service.$inject ?
+       service.$inject().map(serviceName => ({
+         name: serviceName,
+         instance: this.get(serviceName)
+        })) : null;
+    
+    const instance = injects
+      ? new service(...injects.map(o => o.instance))
       : new service();
+    
+    for (const i in injects) {
+      console.log(i);
+      instance[i.name] = i.instance;
+    }
+
+    return instance;  
   }
   get(serviceName) {
     if (providers[serviceName]) return providers[serviceName]();

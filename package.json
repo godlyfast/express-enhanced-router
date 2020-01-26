@@ -4,11 +4,18 @@
   "description": "Gives express.js router Infrastructure that it deserves",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "npm test -- --watch --coverage"
   },
   "author": "Tymur Smyr <godlyfast@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "pluralize": "^8.0.0"
+  },
+  "jshintConfig": {
+    "esversion": "6"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }

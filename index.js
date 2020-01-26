@@ -1,4 +1,7 @@
-const {ControllerRegistrator} = require("./helpers/controller-registrator.helper");
-module.exports = (router) => {
-    return ControllerRegistrator(router, "../../infrastructure/controllers");
-}
+const { ControllerRegistrar } = require("./helpers/controller-registrar.helper");
+module.exports = (router, infrastructureRootPath = "../..") => {
+  return ControllerRegistrar(
+    router,
+    `${infrastructureRootPath}/infrastructure/controllers`
+  );
+};

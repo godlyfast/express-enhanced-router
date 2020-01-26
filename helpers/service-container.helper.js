@@ -2,8 +2,13 @@ var pluralize = require("pluralize");
 const { toKebab, toPascal } = require("./string.helper");
 
 const ROOT_LEVEL = '../../../';
-
+const providers = {};
 class ServiceContainer {
+
+  registerProvider(name, provider) {
+    providers[name] = provider;
+  }
+
   _createEntity(entity, serviceName) {
     const module = require(ROOT_LEVEL + "infrastructure/" +
       pluralize(entity) +
@@ -17,6 +22,7 @@ class ServiceContainer {
       : new service();
   }
   get(serviceName) {
+    if (providers[serviceName]) return providers[serviceName]();
     let providerFile;
     try {
       providerFile = require(ROOT_LEVEL + "infrastructure/providers/" +

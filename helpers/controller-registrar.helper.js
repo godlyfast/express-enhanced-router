@@ -4,7 +4,7 @@ const { RouteFactory } = require("../factories/route.factory");
 const { capitalize, toKebab } = require("./string.helper");
 
 module.exports = {
-  ControllerRegistrator: (router, controllerPath) => {
+  ControllerRegistrar: (router, controllerPath) => {
     var normalizedPath = path.join(__dirname, "../" + controllerPath);
 
     fs.readdirSync(normalizedPath).forEach(function(file) {

@@ -13,7 +13,7 @@
     "pluralize": "^8.0.0"
   },
   "jshintConfig": {
-    "esversion": "6"
+    "esversion": "9"
   },
   "devDependencies": {
     "jest": "^25.1.0"

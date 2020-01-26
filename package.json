@@ -1,6 +1,6 @@
 {
   "name": "express-enhanced-router",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Gives express.js router Infrastructure that it deserves",
   "main": "index.js",
   "scripts": {

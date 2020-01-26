@@ -19,11 +19,15 @@ class ResponseMock {
     }
 }
 
+class FooController {
+    getFoo() {
+        return Promise.resolve({foo: true});
+    }
+}
+
 describe('Route Factory', () => {
     it('Should work', () => {
-        ServiceContainer.registerProvider("FooController", () => ({
-            getFoo: () => Promise.resolve({foo: true})
-        }));
+        ServiceContainer.registerProvider("FooController", () => new FooController());
         const r = RouteFactory([{name: 'foo', action: 'getFoo', controller: 'FooController'}]);
         expect(r).toBeTruthy();
         expect(r.foo).toBeDefined();

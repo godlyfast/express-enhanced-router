@@ -29,7 +29,10 @@ class ServiceContainer {
         serviceName +
         ".provider");
     } catch (e) {}
-    if (providerFile) return providerFile[toPascal(serviceName) + "Provider"]();
+    if (providerFile) {
+      providers[serviceName] = providerFile[toPascal(serviceName) + "Provider"];
+      return providers[serviceName]();
+    }
     switch (toKebab(serviceName).split("-")[1]) {
       case "service":
         return this._createEntity("service", serviceName);

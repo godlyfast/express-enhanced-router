@@ -1,5 +1,7 @@
 var pluralize = require("pluralize");
-const { toKebab, toPascal } = require("./string.helper");
+const { toPascal } = require("./string.helper");
+const _ = require('lodash');
+
 
 const ROOT_LEVEL = '../../../';
 const providers = {};
@@ -21,7 +23,7 @@ class ServiceContainer {
     const module = require(this.rootLevel + "infrastructure/" +
       pluralize(entity) +
       "/" +
-      toKebab(serviceName).split("-")[0] +
+      _.kebabCase(serviceName).split("-")[0] +
       "." +
       entity);
     const service = module[serviceName];
@@ -37,8 +39,7 @@ class ServiceContainer {
       : new service();
     
     for (const i in injects) {
-      console.log(i);
-      instance[i.name] = i.instance;
+      instance[_.camelCase(i.name)] = i.instance;
     }
 
     return instance;  
@@ -55,7 +56,7 @@ class ServiceContainer {
       providers[serviceName] = providerFile[toPascal(serviceName) + "Provider"];
       return providers[serviceName]();
     }
-    switch (toKebab(serviceName).split("-")[1]) {
+    switch (_.kebabCase(serviceName).split("-")[1]) {
       case "service":
         return this._createEntity("service", serviceName);
       case "controller":

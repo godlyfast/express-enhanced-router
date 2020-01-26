@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { RouteFactory } = require("../factories/route.factory");
-const { capitalize, toKebab } = require("./string.helper");
+const _ = require('lodash');
 
 module.exports = {
   ControllerRegistrar: (router, controllerPath) => {
@@ -10,7 +10,7 @@ module.exports = {
     fs.readdirSync(normalizedPath).forEach(function(file) {
       const relPath = path.relative(__dirname, normalizedPath) + '/' + file;
       const module = require(relPath);
-      const ctrlName = capitalize(file.split(".")[0]) + "Controller";
+      const ctrlName = _.capitalize(file.split(".")[0]) + "Controller";
       const ctrl = module[ctrlName];
       if (!ctrl)
         throw new Error(`Controller file ${file} should export ${ctrlName}`);
@@ -31,7 +31,7 @@ module.exports = {
           }))
         );
         actions.forEach(action => {
-          const kebabbedAction = toKebab(action.action);
+          const kebabbedAction = _.kebabCase(action.action);
           const actionSplitted = kebabbedAction.split("-");
           var method;
           var path = "/";

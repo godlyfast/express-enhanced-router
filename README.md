@@ -1,4 +1,5 @@
 # express-enhanced-router
+
 Gives express.js router Infrastructure that it deserves
 
 ## Usage
@@ -7,7 +8,7 @@ Gives express.js router Infrastructure that it deserves
 npm install --save express-enhanced-router
 ```
 
-### Create those dirs at root of your project:
+### Create those dirs at root of your project
 
 - infrastructure/controllers
 - infrastructure/factories
@@ -21,9 +22,6 @@ Create `infrastructure/controllers/test.controller.js`
 
 ```javascript
 class TestController {
-    controller(testService) {
-        this.testService = testService;
-    }
     static $inject() { return ['TestService']; } // return list of injectables from your service folder
     static $actions() { return ['getFoo']; } // return list of your controller's actions
     getFoo(request, response) {
@@ -65,9 +63,6 @@ Create `infrastructure/services/test.service.js`
 
 class TestService {
     static $inject() { return ['test']; } // this will hook up TestProvider
-    constructor(test) {
-        this.test = test;
-    }
     foo() {
         return new Promise((resolve, reject) => {
             resolve({
@@ -99,4 +94,4 @@ app.listen(3000, (err) => {
 })
 ```
 
-### That's IT!
+### That's IT
